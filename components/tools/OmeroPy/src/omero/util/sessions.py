@@ -386,7 +386,7 @@ class SessionsStore(object):
             try:
                 cb = client.submit(req)  # Response is "OK"
                 cb.close(True)
-            except omero.CmdError, ce:
+            except omero.CmdError as ce:
                 self.ctx.dbg(str(ce.err))
             except:
                 import traceback
@@ -418,7 +418,7 @@ class SessionsStore(object):
             try:
                 client = self.attach(hS, nS, sS)
                 client.killSession()
-            except Exception, e:
+            except Exception as e:
                 self.logger.debug("Exception on killSession: %s" % e)
             s.remove()
             removed.append(s)

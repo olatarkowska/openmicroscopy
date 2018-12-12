@@ -139,6 +139,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         sys.stderr.write("\nCancelled by user\n")
         sys.exit(2)
-    except SystemExit, se:
+    except SystemExit as se:
         notification(""" Failed: %s """ % " ".join(args), 100)
         sys.exit(se.code)

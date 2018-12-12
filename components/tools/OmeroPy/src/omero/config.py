@@ -337,7 +337,7 @@ class ConfigXml(object):
                 self._close_lock()
             except:
                 self.logger.error("Failed to close lock", exc_info=1)
-        except Exception, e:
+        except Exception as e:
             try:
                 temp_file.remove()
             except:

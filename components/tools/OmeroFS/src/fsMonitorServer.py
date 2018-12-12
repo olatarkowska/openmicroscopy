@@ -113,7 +113,7 @@ class MonitorServerI(monitors.MonitorServer):
                 timeout, blockSize, ignoreSysFiles, ignoreDirEvents,
                 platformCheck, self, monitorId)
 
-        except Exception, e:
+        except Exception as e:
             self.log.exception('Failed to create monitor: ')
             raise omero.OmeroFSError(
                 reason='Failed to create monitor: ' + str(e))
@@ -144,7 +144,7 @@ class MonitorServerI(monitors.MonitorServer):
         try:
             self.monitors[id].start()
             self.log.info('Monitor id = ' + id + ' started')
-        except Exception, e:
+        except Exception as e:
             self.log.error(
                 'Monitor id = ' + id + ' failed to start: ' + str(e))
             raise omero.OmeroFSError(
@@ -169,7 +169,7 @@ class MonitorServerI(monitors.MonitorServer):
         try:
             self.monitors[id].stop()
             self.log.info('Monitor id = ' + id + ' stopped')
-        except Exception, e:
+        except Exception as e:
             self.log.error('Monitor id = ' + id + ' failed to stop: ' + str(e))
             raise omero.OmeroFSError(
                 reason='Monitor id = ' + id + ' failed to stop: ' + str(e))
@@ -194,7 +194,7 @@ class MonitorServerI(monitors.MonitorServer):
             del self.monitors[id]
             del self.proxies[id]
             self.log.info('Monitor id = ' + id + ' destroyed')
-        except Exception, e:
+        except Exception as e:
             self.log.error('Monitor id = ' + id + ' not destroyed: ' + str(e))
             raise omero.OmeroFSError(
                 reason='Monitor id = ' + id + ' not destroyed: ' + str(e))
@@ -251,7 +251,7 @@ class MonitorServerI(monitors.MonitorServer):
             self.log.info('Event notification on monitor id= %s', monitorId)
             self.log.debug(' ...notifications are: %s', str(eventList))
             proxy.fsEventHappened(monitorId, eventList)
-        except Exception, e:
+        except Exception as e:
             self.log.info(
                 'Callback to monitor id=' + monitorId
                 + ' failed. Reason: ' + str(e))

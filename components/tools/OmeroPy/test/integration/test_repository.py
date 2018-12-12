@@ -367,7 +367,7 @@ class TestDbSync(AbstractRepoTest):
         try:
             self.create_file(mrepo, fooname)
             assert False, "Should have thrown"
-        except omero.grid.UnregisteredFileException, ufe:
+        except omero.grid.UnregisteredFileException as ufe:
             file = mrepo.register(fooname, None)
             assert file.path == ufe.file.path
             assert file.name == ufe.file.name
@@ -378,7 +378,7 @@ class TestDbSync(AbstractRepoTest):
         try:
             self.create_file(mrepo, mydir)
             assert False, "Should have thrown"
-        except omero.grid.UnregisteredFileException, ufe:
+        except omero.grid.UnregisteredFileException as ufe:
             file = mrepo.register(mydir, None)
             assert file.mimetype == ufe.file.mimetype
 

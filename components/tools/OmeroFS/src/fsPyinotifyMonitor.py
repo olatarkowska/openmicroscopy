@@ -156,7 +156,7 @@ class MyWatchManager(pyinotify.WatchManager):
             if rec:
                 for d in pathModule.path(path).dirs():
                     self.addWatch(str(d), mask)
-        except Exception, e:
+        except Exception as e:
             self.log.error(
                 'Unable to create base watch on: %s : %s', path, str(e))
             raise e
@@ -176,7 +176,7 @@ class MyWatchManager(pyinotify.WatchManager):
                     self.log.info('Watch added on: %s', path)
                 else:
                     self.log.info('Unable to add watch on: %s', path)
-            except Exception, e:
+            except Exception as e:
                 self.log.error(
                     'Unable to add watch on: %s : %s', path, str(e))
 
@@ -201,7 +201,7 @@ class MyWatchManager(pyinotify.WatchManager):
                         self.log.info(
                             'Watch remove failed, wd=%s, on: %s',
                             wd, removeDict[wd])
-            except Exception, e:
+            except Exception as e:
                 self.log.error(
                     'Unable to remove watch on: %s : %s', path, str(e))
 

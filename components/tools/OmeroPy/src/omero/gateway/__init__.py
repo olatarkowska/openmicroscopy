@@ -1603,7 +1603,7 @@ class _BlitzGateway (object):
 
         try:
             stateful_services = self.c.getStatefulServices()
-        except Exception, e:
+        except Exception as e:
             logger.warn("No services could be found.", e)
             stateful_services = []
 
@@ -1858,7 +1858,7 @@ class _BlitzGateway (object):
             logger.debug(traceback.format_exc())
             logger.debug("... session has left the building, not reconnecting")
             return False
-        except Ice.UnknownException, x:  # pragma: no cover
+        except Ice.UnknownException as x:  # pragma: no cover
             # Probably a wrapped RemovedSession
             logger.debug(traceback.format_exc())
             logger.debug('Ice.UnknownException: %s' % str(x))
@@ -2137,7 +2137,7 @@ class _BlitzGateway (object):
                     self._was_join = True
                 except Ice.SyscallException:  # pragma: no cover
                     raise
-                except Exception, x:  # pragma: no cover
+                except Exception as x:  # pragma: no cover
                     logger.debug("Error: " + str(x))
                     self._sessionUuid = None
                     if sUuid:
@@ -2220,11 +2220,11 @@ class _BlitzGateway (object):
         except Ice.SyscallException:  # pragma: no cover
             logger.debug('This one is a SyscallException', exc_info=True)
             raise
-        except Ice.LocalException, x:  # pragma: no cover
+        except Ice.LocalException as x:  # pragma: no cover
             logger.debug("connect(): " + traceback.format_exc())
             self._last_error = x
             return False
-        except Exception, x:  # pragma: no cover
+        except Exception as x:  # pragma: no cover
             logger.debug("connect(): " + traceback.format_exc())
             self._last_error = x
             return False
@@ -3806,14 +3806,14 @@ class _BlitzGateway (object):
                                 channelsMinMax[theC][0], minValue)
                             channelsMinMax[theC][1] = max(
                                 channelsMinMax[theC][1], maxValue)
-        except Exception, e:
+        except Exception as e:
             logger.error(
                 "Failed to setPlane() on rawPixelsStore while creating Image",
                 exc_info=True)
             exc = e
         try:
             rawPixelsStore.close(self.SERVICE_OPTS)
-        except Exception, e:
+        except Exception as e:
             logger.error("Failed to close rawPixelsStore", exc_info=True)
             if exc is None:
                 exc = e
@@ -4666,7 +4666,7 @@ class OmeroGatewaySafeCallWrapper(object):  # pragma: no cover
     def __call__(self, *args, **kwargs):
         try:
             return self.f(*args, **kwargs)
-        except Exception, e:
+        except Exception as e:
             self.debug(e.__class__.__name__, args, kwargs)
             return self.handle_exception(e, *args, **kwargs)
 
@@ -7291,7 +7291,7 @@ class _PixelsWrapper (BlitzObjectWrapper):
                 remappedPlane = numpy.array(convertedPlane, numpyType)
                 remappedPlane.resize(planeY, planeX)
                 yield remappedPlane
-        except Exception, e:
+        except Exception as e:
             logger.error(
                 "Failed to getPlane() or getTile() from rawPixelsStore",
                 exc_info=True)
@@ -7299,7 +7299,7 @@ class _PixelsWrapper (BlitzObjectWrapper):
         try:
             if rawPixelsStore is not None:
                 rawPixelsStore.close()
-        except Exception, e:
+        except Exception as e:
             logger.error("Failed to close rawPixelsStore", exc_info=True)
             if exc is None:
                 exc = e
@@ -8211,7 +8211,7 @@ class _ImageWrapper (BlitzObjectWrapper, OmeroRestrictionWrapper):
                 try:
                     # E.g. May throw Missing Pyramid Exception
                     tb.resetDefaults(ctx)
-                except omero.ConcurrencyException, ce:
+                except omero.ConcurrencyException as ce:
                     logger.info(
                         "ConcurrencyException: resetDefaults() failed "
                         "in _prepareTB with backOff: %s" % ce.backOff)
@@ -9112,7 +9112,7 @@ class _ImageWrapper (BlitzObjectWrapper, OmeroRestrictionWrapper):
         try:
             if self._re is not None:
                 self._re.close()
-        except Exception, e:
+        except Exception as e:
             logger.warn("Failed to close " + self._re)
             logger.debug(e)
         finally:
@@ -9352,7 +9352,7 @@ class _ImageWrapper (BlitzObjectWrapper, OmeroRestrictionWrapper):
         try:
             proc = svc.runScript(mms.id.val, m, None)
             proc.getJob()
-        except omero.ValidationException, ve:
+        except omero.ValidationException as ve:
             logger.error('Bad Parameters:\n%s' % ve)
             return None, None
 

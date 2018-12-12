@@ -244,13 +244,13 @@ To quit, enter 'q' or just enter.
             rv = querySvc.projection(queryStr, params, ice_map)
             self.ctx.set("last.hql.rv", rv)
             return rv
-        except omero.SecurityViolation, sv:
+        except omero.SecurityViolation as sv:
             if "omero.group" in ice_map:
                 self.ctx.die(53, "SecurityViolation: Current user is not an"
                                  " admin and cannot use '--admin'")
             else:
                 self.ctx.die(54, "SecurityViolation: %s" % sv)
-        except omero.QueryException, qe:
+        except omero.QueryException as qe:
             self.ctx.set("last.hql.rv", [])
             self.ctx.die(52, "Bad query: %s" % qe.message)
 

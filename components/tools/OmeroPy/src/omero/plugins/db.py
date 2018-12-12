@@ -144,7 +144,7 @@ class DatabaseControl(BaseControl):
                                 output.write(func(s) % cfg)
                             else:
                                 output.write(func(s))
-                        except Exception, e:
+                        except Exception as e:
                             self.ctx.die(
                                 154, "Failed to map line: %s\nError: %s"
                                 % (s, e))
@@ -256,7 +256,7 @@ BEGIN;
                 old_prompt = False
         try:
             root_pass = args.password
-        except Exception, e:
+        except Exception as e:
             self.ctx.dbg("While getting arguments:" + str(e))
         if args.empty:
             password_hash = ""
@@ -273,7 +273,7 @@ BEGIN;
             data2 = self.ctx.initData({})
             output = self.ctx.readDefaults()
             self.ctx.parsePropertyFile(data2, output)
-        except Exception, e:
+        except Exception as e:
             self.ctx.dbg(str(e))
             data2 = None
         return data2

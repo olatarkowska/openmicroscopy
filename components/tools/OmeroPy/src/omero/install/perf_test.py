@@ -132,7 +132,7 @@ class Item(object):
             if prop == "":
                 try:
                     id = int(id_path.lines()[0])
-                except Exception, e:
+                except Exception as e:
                     log.debug("No %s.id: %s", name, e)
                     prop = str(uuid.uuid4())
             # Now, if there's still no id, create one

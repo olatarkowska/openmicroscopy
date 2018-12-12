@@ -207,7 +207,7 @@ def internal_service_factory(communicator, user="root", group=None, retries=6,
             sf = blitz.create(user, None)
             # Group currently unused.
             return omero.api.ServiceFactoryPrx.checkedCast(sf)
-        except Exception, e:
+        except Exception as e:
             tryCount += 1
             log.info("Failed to get session on attempt %s", str(tryCount))
             excpt = e
@@ -286,7 +286,7 @@ def load_dotted_class(dotted_class):
         got = __import__(pkg, fromlist=[mod])
         got = getattr(got, mod)
         return getattr(got, kls)
-    except Exception, e:
+    except Exception as e:
         raise Exception("""Failed to load: %s
         previous excetion: %s""" % (dotted_class, e))
 
@@ -370,7 +370,7 @@ class ServerContext(object):
                 self.session.keepAlive(None)
             except Ice.CommunicatorDestroyedException:
                 self.session = None  # Ignore
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn("Connection failure: %s" % e)
                 self.session = None
 
@@ -378,7 +378,7 @@ class ServerContext(object):
             try:
                 self.newSession()
                 self.logger.info("Established connection: %s" % self.session)
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn("Failed to establish connection: %s" % e)
 
         if self.session is None:

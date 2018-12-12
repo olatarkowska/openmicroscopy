@@ -520,7 +520,7 @@ class Event(_Event):
                                                              self.name))
             else:
                 self.pathname = os.path.abspath(self.path)
-        except AttributeError, err:
+        except AttributeError as err:
             # Usually it is not an error some events are perfectly valids
             # despite the lack of these attributes.
             log.debug(err)
@@ -1121,7 +1121,7 @@ class Notifier:
                 if timeout is None:
                     timeout = self._timeout
                 ret = self._pollobj.poll(timeout)
-            except select.error, err:
+            except select.error as err:
                 if err[0] == errno.EINTR:
                     continue # interrupted, retry
                 else:
@@ -1152,7 +1152,7 @@ class Notifier:
         try:
             # Read content from file
             r = os.read(self._fd, queue_size)
-        except Exception, msg:
+        except Exception as msg:
             raise NotifierError(msg)
         log.debug('Event queue size: %d', queue_size)
         rsum = 0  # counter
@@ -1632,7 +1632,7 @@ class WatchManager:
         """
         try:
             del self._wmd[wd]
-        except KeyError, err:
+        except KeyError as err:
             log.error(str(err))
 
     @property

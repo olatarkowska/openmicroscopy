@@ -1588,7 +1588,7 @@ class OmeroWebGateway(omero.gateway.BlitzGateway):
         message = None
         try:
             cb = self.c.submit(command, loops=120)
-        except omero.CmdError, ex:
+        except omero.CmdError as ex:
             message = ex.err.message
         finally:
             if cb:
@@ -2101,7 +2101,7 @@ class OmeroWebSafeCallWrapper(OmeroGatewaySafeCallWrapper):  # pragma: no cover
                     self.proxyObjectWrapper._create_func()
                 func = getattr(self.proxyObjectWrapper._obj, self.attr)
                 return func(*args, **kwargs)
-            except Exception, e:
+            except Exception as e:
                 self.debug(e.__class__.__name__, args, kwargs)
                 raise
         else:

@@ -551,7 +551,7 @@ present, the user will enter a console""")
                         win32security.LsaAddAccountRights(
                             policy_handle, sid_obj, ('SeServiceLogonRight',))
                         win32security.LsaClose(policy_handle)
-                    except pywintypes.error, details:
+                    except pywintypes.error as details:
                         self.ctx.die(200, "Error during service user set up:"
                                      " (%s) %s" % (details[0], details[2]))
                     if not pasw:
@@ -594,7 +594,7 @@ present, the user will enter a console""")
                         hscm, svc_name, win32service.SC_MANAGER_ALL_ACCESS)
                     win32service.StartService(hs, None)
                     self.ctx.out("Starting %s Windows service." % svc_name)
-                except pywintypes.error, details:
+                except pywintypes.error as details:
                     self.ctx.out("%s service startup failed: (%s) %s"
                                  % (svc_name, details[0], details[2]))
                     win32service.DeleteService(hs)
@@ -788,7 +788,7 @@ present, the user will enter a console""")
         self.startasync(args, config)
         try:
             self.waitup(args)
-        except NonZeroReturnCode, nzrc:
+        except NonZeroReturnCode as nzrc:
             # stop() may itself throw,
             # if it does not, then we rethrow
             # the original
@@ -849,7 +849,7 @@ present, the user will enter a console""")
                         self.ctx.rv = 0
                 finally:
                     ic.destroy()
-            except Exception, exc:
+            except Exception as exc:
                 self.ctx.rv = 1
                 self.ctx.dbg("Server not reachable: "+str(exc))
 
@@ -957,7 +957,7 @@ present, the user will enter a console""")
             command = self._cmd("-e", "node shutdown %s" % self._node())
             try:
                 self.ctx.call(command)
-            except NonZeroReturnCode, nzrc:
+            except NonZeroReturnCode as nzrc:
                 self.ctx.rv = nzrc.rv
                 self.ctx.out("Was the server already stopped?")
 
@@ -1028,7 +1028,7 @@ present, the user will enter a console""")
         template_xml = XML(templates.text())
         try:
             rv = adjust_settings(config, template_xml)
-        except Exception, e:
+        except Exception as e:
             self.ctx.die(11, 'Cannot adjust memory settings in %s.\n%s'
                          % (templates, e))
 
@@ -1073,7 +1073,7 @@ present, the user will enter a console""")
         template_xml = XML(templates.text())
         try:
             rv = adjust_settings(config, template_xml)
-        except Exception, e:
+        except Exception as e:
             self.ctx.die(11, 'Cannot adjust memory settings in %s.\n%s'
                          % (templates, e))
 
@@ -1143,7 +1143,7 @@ present, the user will enter a console""")
             template_xml = XML(templates.text())
             try:
                 memory = read_settings(template_xml)
-            except Exception, e:
+            except Exception as e:
                 self.ctx.die(11, 'Cannot read memory settings in %s.\n%s'
                              % (templates, e))
         else:
@@ -1193,7 +1193,7 @@ present, the user will enter a console""")
                     where = "unknown"
                 self.ctx.out("(%s)" % where)
                 return True
-            except Exception, e:
+            except Exception as e:
                 self.ctx.err("error:%s" % e)
                 return False
 
@@ -1453,7 +1453,7 @@ present, the user will enter a console""")
             cb = client.submit(
                 req, loops=loops, ms=ms,
                 failonerror=True, failontimeout=True)
-        except omero.CmdError, ce:
+        except omero.CmdError as ce:
             err = ce.err
             if err.name == "no-body" and err.parameters:
                 sb = err.parameters.items()
@@ -1632,7 +1632,7 @@ present, the user will enter a console""")
         try:
             try:
                 config = omero.config.ConfigXml(str(cfg_xml))
-            except Exception, e:
+            except Exception as e:
                 self.ctx.die(577, str(e))
             if config.save_on_close:
                 config.save()

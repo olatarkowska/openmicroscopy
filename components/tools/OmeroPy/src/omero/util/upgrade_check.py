@@ -139,7 +139,7 @@ class UpgradeCheck(object):
             finally:
                 socket.setdefaulttimeout(old_timeout)
 
-        except Exception, e:
+        except Exception as e:
             self.log.error(str(e), exc_info=0)
             self._set(None, e)
             return

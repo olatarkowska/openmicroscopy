@@ -93,7 +93,7 @@ class Worker(Thread):
             func, args, kargs = self.tasks.get()
             try:
                 func(*args, **kargs)
-            except Exception, e:
+            except Exception as e:
                 log.exception(e)
             self.tasks.task_done()
 
@@ -1267,7 +1267,7 @@ class InCellMeasurementCtx(AbstractMeasurementCtx):
 if __name__ == "__main__":
     try:
         options, args = getopt(sys.argv[1:], "s:p:u:m:k:t:id")
-    except GetoptError, (msg, opt):
+    except GetoptError as (msg, opt):
         usage(msg)
 
     try:

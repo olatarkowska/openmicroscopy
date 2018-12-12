@@ -274,7 +274,7 @@ class ConcurrentRotatingFileHandler(BaseRotatingHandler):
             try:
                 # Do a rename test to determine if we can successfully rename the log file
                 os.rename(self.baseFilename, tmpname)
-            except (IOError, OSError):
+            except (IOError as OSError):
                 exc_value = sys.exc_info()[1]
                 self._degrade(True, "rename failed.  File in use?  "
                               "exception=%s", exc_value)

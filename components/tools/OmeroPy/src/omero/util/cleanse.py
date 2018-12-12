@@ -172,7 +172,7 @@ class Cleanser(object):
                     else:
                         try:
                             os.unlink(path)
-                        except OSError, e:
+                        except OSError as e:
                             print e
             elif self.dry_run:
                 print "   \_ %s (keep)" % path
@@ -272,7 +272,7 @@ def delete_empty_dirs(repo, root, client, dry_run):
             handle = repo.deletePaths(batch_to_delete, True, False)
             try:
                 client.waitOnCmd(handle, closehandle=True)
-            except omero.CmdError, ce:
+            except omero.CmdError as ce:
                 if isinstance(ce.err, omero.cmd.GraphException):
                     raise Exception("failed delete: " + ce.err.message)
                 else:
@@ -361,7 +361,7 @@ def removepyramids(client, little_endian=None, dry_run=False,
                            failonerror=True,
                            failontimeout=True)
         rsp = cb.getResponse()
-    except omero.CmdError, ce:
+    except omero.CmdError as ce:
         print "Failed to load pyramids: %s" % ce.err.name
         return
     finally:
@@ -386,7 +386,7 @@ def removepyramids(client, little_endian=None, dry_run=False,
                                    failonerror=True,
                                    failontimeout=True)
                 print "Pyramid removed for image %s" % image_id
-            except omero.CmdError, ce:
+            except omero.CmdError as ce:
                 print "Failed to remove for image %s: %s" % (
                     image_id, ce.err.name)
             finally:
@@ -403,7 +403,7 @@ def main():
     """
     try:
         options, args = getopt(sys.argv[1:], "u:k:", ["dry-run"])
-    except GetoptError, (msg, opt):
+    except GetoptError as (msg, opt):
         usage(msg)
 
     try:

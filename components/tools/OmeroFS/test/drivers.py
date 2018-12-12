@@ -144,7 +144,7 @@ class Driver(threading.Thread):
             try:
                 event.setClient(self.client)
                 event.run()
-            except Exception, e:
+            except Exception as e:
                 self.errors.append((event, e))
                 self.log.exception("Error in Driver.run()")
 

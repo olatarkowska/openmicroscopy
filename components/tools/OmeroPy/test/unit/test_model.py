@@ -65,7 +65,7 @@ class TestProxyString(object):
             assert not obj.loaded
             if err:
                 assert False, "should have raised"
-        except Exception, e:
+        except Exception as e:
             if not err:
                 assert "should not have raised", e
 

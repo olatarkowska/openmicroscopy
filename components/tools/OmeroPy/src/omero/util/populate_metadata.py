@@ -1666,7 +1666,7 @@ class DeleteMapAnnotationContext(_QueryContext):
         try:
             callback = self.client.submit(
                 delCmd, loops=loops, ms=ms, failontimeout=True)
-        except CmdError, ce:
+        except CmdError as ce:
             log.error("Failed to delete: %s" % to_delete)
             raise Exception(ce.err)
 
@@ -1709,7 +1709,7 @@ def parse_column_types(column_type_list):
 if __name__ == "__main__":
     try:
         options, args = getopt(sys.argv[1:], "s:p:u:w:k:c:id", ["columns="])
-    except GetoptError, (msg, opt):
+    except GetoptError as (msg, opt):
         usage(msg)
 
     try:

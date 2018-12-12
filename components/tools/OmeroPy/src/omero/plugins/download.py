@@ -64,11 +64,11 @@ class DownloadControl(BaseControl):
                 sys.stdout.flush()
             else:
                 client.download(orig_file, target_file)
-        except omero.ValidationException, ve:
+        except omero.ValidationException as ve:
             # Possible, though unlikely after previous check
             self.ctx.die(67, "Unknown ValidationException: %s"
                          % ve.message)
-        except omero.ResourceError, re:
+        except omero.ResourceError as re:
             # ID exists in DB, but not on FS
             self.ctx.die(67, "ResourceError: %s" % re.message)
 

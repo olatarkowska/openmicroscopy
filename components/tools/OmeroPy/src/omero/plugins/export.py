@@ -125,7 +125,7 @@ class ExportControl(BaseControl):
                     l = e.generateTiff()
                 else:
                     l = e.generateXml()
-            except omero.ServerError, se:
+            except omero.ServerError as se:
                 self.ctx.err("%s: %s" % (se.__class__.__name__, se.message))
                 return
 
@@ -145,7 +145,7 @@ class ExportControl(BaseControl):
                     handle.close()
                     if remove:
                         os.remove(handle.name)
-            except Exception, e:
+            except Exception as e:
                 self.ctx.err("Failed to close handle: %s" % e)
 
             e.close()

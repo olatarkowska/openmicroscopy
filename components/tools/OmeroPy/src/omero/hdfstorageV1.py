@@ -223,7 +223,7 @@ class HdfStorage(object):
             return tables.openFile(str(self.__hdf_path), mode=mode,
                                    title="OMERO HDF Measurement Storage",
                                    rootUEP="/")
-        except (tables.HDF5ExtError, IOError) as e:
+        except (tables.HDF5ExtError as IOError) as e:
             msg = "HDFStorage initialized with bad path: %s: %s" % (
                 self.__hdf_path, e)
             self.logger.error(msg)
@@ -506,7 +506,7 @@ class HdfStorage(object):
         try:
             return self.__mea.getWhereList(condition, variables, None,
                                            start, stop, step).tolist()
-        except (NameError, SyntaxError, TypeError, ValueError), err:
+        except (NameError, SyntaxError, TypeError, ValueError) as err:
             aue = omero.ApiUsageException()
             aue.message = "Bad condition: %s, %s" % (condition, variables)
             aue.serverStackTrace = "".join(traceback.format_exc())

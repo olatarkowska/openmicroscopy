@@ -83,7 +83,7 @@ class SearchControl(HqlControl):
         try:
             t = time.strptime(user_string, "%Y-%m-%d")
             return time.strftime("%Y%m%d", t)
-        except Exception, e:
+        except Exception as e:
             self.ctx.dbg(str(e))
             raise
 
@@ -106,7 +106,7 @@ class SearchControl(HqlControl):
                 obj = of.create(kls)
                 id = long(parts[1].strip())
                 obj.setId(omero.rtypes.rlong(id))
-            except Exception, e:
+            except Exception as e:
                 self.ctx.dbg(e)
                 self.ctx.die(432, "Bad object: %s" % args.type)
 
@@ -155,7 +155,7 @@ class SearchControl(HqlControl):
                         self.display(results,
                                      style=args.style,
                                      idsonly=args.ids_only)
-                except omero.ApiUsageException, aue:
+                except omero.ApiUsageException as aue:
                     self.ctx.die(434, aue.message)
 
             finally:

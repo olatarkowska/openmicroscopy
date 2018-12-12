@@ -381,7 +381,7 @@ class FsControl(CmdControl):
                 rsp = cb.getResponse()
             finally:
                 cb.close(True)
-        except Exception, e:
+        except Exception as e:
             self.ctx.dbg("Error on MIB: %s" % e)
 
         if rsp is None:
@@ -532,7 +532,7 @@ moved.
                 self.ctx.die(110, "Cannot edit Fileset:%s" % fid)
             elif oid != uid and not isAdmin:
                 self.ctx.die(111, "Fileset:%s belongs to %s" % (fid, oid))
-        except ServerError, se:
+        except ServerError as se:
             self.ctx.die(
                 112, "Could not load Fileset:%s- %s" % (fid, se.message))
 
@@ -573,7 +573,7 @@ moved.
                 self.ctx.err("Moving %s to %s" % (from_path, to_path))
                 try:
                     self.ctx.get_client().submit(raw)
-                except CmdError, ce:
+                except CmdError as ce:
                     self.ctx.die(114, ce.err)
         else:
             self.ctx.err(
@@ -753,7 +753,7 @@ Examples:
                     try:
                         cb = client.submit(raw)
                         cb.close(True)
-                    except CmdError, ce:
+                    except CmdError as ce:
                         err = ce.err
                         self.ctx.dbg(err)
 
@@ -794,11 +794,11 @@ Examples:
                         sys.stdout.flush()
                     else:
                         client.download(log, target_file)
-                except ValidationException, ve:
+                except ValidationException as ve:
                     # This should effectively be handled by None being
                     # returned from the logfile query above.
                     self.ctx.die(115, "ValidationException: %s" % ve.message)
-                except ResourceError, re:
+                except ResourceError as re:
                     # ID exists in DB, but not on FS
                     self.ctx.die(116, "ResourceError: %s" % re.message)
         else:

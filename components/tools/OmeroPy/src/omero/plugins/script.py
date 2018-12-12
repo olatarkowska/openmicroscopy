@@ -311,7 +311,7 @@ class ScriptControl(BaseControl):
                 try:
                     self.ctx.invoke(['script', method.__name__] +
                                     list(arguments))
-                except Exception, e:
+                except Exception as e:
                     import traceback
                     self.ctx.out("\nEXECUTION FAILED: %s" % e)
                     self.ctx.dbg(traceback.format_exc())
@@ -347,7 +347,7 @@ class ScriptControl(BaseControl):
             for p in list(getattr(self, "_processors", [])):
                 p.cleanup()
                 self._processors.remove(p)
-        except Exception, e:
+        except Exception as e:
             self.ctx.err("Failed to clean processors: %s" % e)
 
         self.ctx.out("\nDeleting script from server...")
@@ -359,7 +359,7 @@ class ScriptControl(BaseControl):
         script_id, ofile = self._file(args, client)
         try:
             self.ctx.out(client.sf.getScriptService().getScriptText(script_id))
-        except Exception, e:
+        except Exception as e:
             self.ctx.err("Failed to find script: %s (%s)" % (script_id, e))
 
     def edit(self, args):
@@ -379,7 +379,7 @@ class ScriptControl(BaseControl):
             p = create_path()
             edit_path(p, txt)
             scriptSvc.editScript(ofile, p.text())
-        except Exception, e:
+        except Exception as e:
             self.ctx.err("Failed to find script: %s (%s)" % (script_id, e))
 
     def jobs(self, args):
@@ -406,7 +406,7 @@ class ScriptControl(BaseControl):
         svc = client.sf.getScriptService()
         try:
             params = svc.getParams(script_id)
-        except omero.ValidationException, ve:
+        except omero.ValidationException as ve:
             self.ctx.die(502, "ValidationException: %s" % ve.message)
 
         m = self._parse_inputs(args, params)
@@ -414,7 +414,7 @@ class ScriptControl(BaseControl):
         try:
             proc = svc.runScript(script_id, m, None)
             job = proc.getJob()
-        except omero.ValidationException, ve:
+        except omero.ValidationException as ve:
             self.ctx.err("Bad parameters:\n%s" % ve)
             return  # EARLY EXIT
 
@@ -483,9 +483,9 @@ class ScriptControl(BaseControl):
 
         try:
             job_params = svc.getParams(script_id)
-        except omero.ValidationException, ve:
+        except omero.ValidationException as ve:
             self.ctx.die(454, "ValidationException: %s" % ve.message)
-        except omero.ResourceError, re:
+        except omero.ResourceError as re:
             self.ctx.die(455, "ResourceError: %s" % re.message)
 
         if job_params:
@@ -579,7 +579,7 @@ class ScriptControl(BaseControl):
                     client, serverid="omero.scripts.serve", accepts_list=who,
                     omero_home=self.ctx.dir)
                 self._processors.append(impl)
-            except Exception, e:
+            except Exception as e:
                 self.ctx.die(100, "Failed initialization: %s" % e)
 
             if background:
@@ -646,13 +646,13 @@ http://stackoverflow.com/questions/3471461/raw-input-and-timeout/3911560
         if args.official:
             try:
                 id = scriptSvc.uploadOfficialScript(args.file, p.text())
-            except omero.ApiUsageException, aue:
+            except omero.ApiUsageException as aue:
                 if "editScript" in aue.message:
                     self.ctx.die(502, "%s already exists; use 'replace'"
                                  " instead" % args.file)
                 else:
                     self.ctx.die(504, "ApiUsageException: %s" % aue.message)
-            except omero.SecurityViolation, sv:
+            except omero.SecurityViolation as sv:
                 self.ctx.die(503, "SecurityViolation: %s" % sv.message)
         else:
             id = scriptSvc.uploadScript(args.file, p.text())
@@ -675,7 +675,7 @@ http://stackoverflow.com/questions/3471461/raw-input-and-timeout/3911560
 
         try:
             scriptSvc.editScript(ofile, scriptText)
-        except omero.SecurityViolation, sv:
+        except omero.SecurityViolation as sv:
             self.ctx.die(200, sv.message)
 
     def delete(self, args):
@@ -683,7 +683,7 @@ http://stackoverflow.com/questions/3471461/raw-input-and-timeout/3911560
         client = self.ctx.conn(args)
         try:
             client.sf.getScriptService().deleteScript(ofile)
-        except Exception, e:
+        except Exception as e:
             self.ctx.err("Failed to delete script: %s (%s)" % (ofile, e))
 
     def disable(self, args):
@@ -749,7 +749,7 @@ omero.pass=%(omero.sess)s
         from omero.scripts import parse_inputs, parse_input, MissingInputs
         try:
             rv = parse_inputs(args.input, params)
-        except MissingInputs, mi:
+        except MissingInputs as mi:
             rv = mi.inputs
             for key in mi.keys:
                 value = self.ctx.input("""Enter value for "%s": """ % key,

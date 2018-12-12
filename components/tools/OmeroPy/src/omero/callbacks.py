@@ -78,7 +78,7 @@ class ProcessCallbackI(omero.grid.ProcessCallback):
                 rc = self.process.poll()
                 if rc is not None:
                     self.processFinished(rc.getValue())
-            except Exception, e:
+            except Exception as e:
                 PROC_LOG.warn("Error calling poll: %s" % e)
 
         self.event.wait(float(ms) / 1000)

@@ -367,7 +367,7 @@ class BaseClient(object):
         """
         try:
             self.closeSession()
-        except Exception, e:
+        except Exception as e:
             # It is perfectly normal for the session to have been closed
             # before garbage collection
             # though for some reason I can't match this exception with the
@@ -581,12 +581,12 @@ class BaseClient(object):
                     self.__oa.add(self.__cb, id)
 
                     break
-                except omero.WrappedCreateSessionException, wrapped:
+                except omero.WrappedCreateSessionException as wrapped:
                     if not wrapped.concurrency:
                         raise wrapped  # We only retry concurrency issues.
                     reason = "%s:%s" % (wrapped.type, wrapped.reason)
                     retries = retries + 1
-                except Ice.ConnectTimeoutException, cte:
+                except Ice.ConnectTimeoutException as cte:
                     reason = "Ice.ConnectTimeoutException:%s" % str(cte)
                     retries = retries + 1
 
@@ -961,7 +961,7 @@ class BaseClient(object):
 
             try:
                 self.stopKeepAlive()
-            except Exception, e:
+            except Exception as e:
                 self.__logger.warning(
                     "While cleaning up resources: " + str(e))
 
@@ -980,7 +980,7 @@ class BaseClient(object):
             if oldOa:
                 try:
                     oldOa.deactivate()
-                except Exception, e:
+                except Exception as e:
                     self.__logger.warning(
                         "While deactivating adapter: " + str(e.message))
 
@@ -1191,7 +1191,7 @@ class BaseClient(object):
         def _closeSession(self):
             try:
                 self.oa.deactivate()
-            except Exception, e:
+            except Exception as e:
                 sys.err.write("On session closed: " + str(e))
 
         def __init__(self, ic, oa, id):

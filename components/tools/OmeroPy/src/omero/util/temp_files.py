@@ -194,7 +194,7 @@ class TempFileManager(object):
                         except:
                             self.logger.debug("Failed os.remove(%s)", name)
 
-            except Exception, e:
+            except Exception as e:
                 if "Operation not permitted" in str(e) or \
                    "Operation not supported" in str(e):
 

@@ -128,7 +128,7 @@ class TestISession(ITest):
             cb.getResponse()
             cb.close(True)
             assert not who.startswith("bad")  # must throw
-        except omero.CmdError, ce:
+        except omero.CmdError as ce:
             if who.startswith("bad"):
                 assert ce.err.name == "non-admin-increase"
                 return

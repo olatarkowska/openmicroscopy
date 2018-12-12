@@ -33,7 +33,7 @@ def not_root():
             sys.exit(1)
         else:
             return euid
-    except AttributeError, ae:
+    except AttributeError as ae:
         # This platform doesn't support effective uid
         # So nothing to worry about.
         return None
@@ -100,7 +100,7 @@ if len(sys.argv) == 2 and sys.argv[1] == "": sys.exit(0)
 try:
     try:
         import omero.cli
-    except ImportError, ie:
+    except ImportError as ie:
         print "*"*80
         print """
         ERROR: Could not import omero.cli! (%s)
@@ -129,6 +129,6 @@ try:
     logging.basicConfig(level=logging.WARN)
     rv = omero.cli.argv()
     sys.exit(rv)
-except KeyboardInterrupt, ki:
+except KeyboardInterrupt as ki:
     print "Cancelled"
     sys.exit(1)

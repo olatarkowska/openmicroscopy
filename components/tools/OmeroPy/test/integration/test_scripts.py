@@ -122,7 +122,7 @@ class TestScripts(ITest):
             try:
                 script_id = svc.uploadScript('testpath', "THIS STINKS")
                 svc.getParams(script_id)
-            except omero.ValidationException, ve:
+            except omero.ValidationException as ve:
                 assert "THIS STINKS" in str(ve), str(ve)
         finally:
             impl.cleanup()

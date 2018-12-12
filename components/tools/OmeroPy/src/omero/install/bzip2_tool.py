@@ -51,7 +51,7 @@ if __name__ == "__main__":
                 sys.exit(2)
             bzip2_tool(disable=which)
             sys.exit(0)
-    except Exception, e:
+    except Exception as e:
         print "bzip2_tool failed: ", e
         sys.exit(1)
 

@@ -27,7 +27,7 @@ class TestPyramid (object):
         try:
             self.image._prepareRE()
             assert False, "_prepareRE should have thrown an exception"
-        except omero.ConcurrencyException, ce:
+        except omero.ConcurrencyException as ce:
             print "Handling MissingPyramidException with backoff: %s secs" \
                 % (ce.backOff/1000)
 
@@ -42,7 +42,7 @@ class TestPyramid (object):
             self.image._prepareRenderingEngine()
             assert False, \
                 "_prepareRenderingEngine() should have thrown an exception"
-        except omero.ConcurrencyException, ce:
+        except omero.ConcurrencyException as ce:
             print "Handling MissingPyramidException with backoff: %s secs" \
                 % (ce.backOff/1000)
 

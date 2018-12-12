@@ -222,7 +222,7 @@ class ImporterLog(object):
 if __name__ == "__main__":
     try:
         options, args = getopt(sys.argv[1:], "", ['series_report', 'help'])
-    except GetoptError, (msg, opt):
+    except GetoptError as (msg, opt):
         usage(msg)
 
     try:

@@ -431,7 +431,7 @@ def parse_text(scriptText):
         finally:
             if old:
                 os.environ["ICE_CONFIG"] = old
-    except ParseExit, exit:
+    except ParseExit as exit:
         return exit.params
 
 
@@ -727,7 +727,7 @@ def set_input(svc, session, key, value):
     try:
         svc.setInput(session, key, value)
         return ""
-    except Exception, e:
+    except Exception as e:
         return error_msg("Failed to set intput", key, "%s=%s. Error: %s", key,
                          value, e)
 

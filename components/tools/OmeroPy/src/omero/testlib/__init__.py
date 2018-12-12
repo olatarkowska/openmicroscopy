@@ -1141,7 +1141,7 @@ class ITest(object):
                     store.setPixelsId(id, True)
                     # No exception. The pyramid is now ready
                     not_ready = False
-                except Exception, ex:
+                except Exception as ex:
                     # try again in elapse_time
                     print count, "Pyramid not ready:", ex.message
                     time.sleep(elapse_time)

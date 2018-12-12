@@ -191,7 +191,7 @@ class RPSTileLoop(TileLoop):
             try:
                 srv = self.getSession().getPixelsService()
                 self.pixels = srv.retrievePixDescription(self.pixels.id.val)
-            except Exception, e:
+            except Exception as e:
                 import omero
                 raise omero.ClientError(
                     "Failed to load %s\n%s" % (self.pixels.id.val, e))

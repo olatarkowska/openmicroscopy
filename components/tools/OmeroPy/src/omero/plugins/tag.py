@@ -655,7 +655,7 @@ JSON File Format:
         update_service = session.getUpdateService()
         try:
             annotation = query_service.find("TagAnnotation", tag_id)
-        except omero.SecurityViolation, sv:
+        except omero.SecurityViolation as sv:
             self.ctx.die(510, "SecurityViolation: %s" % sv.message)
 
         if not annotation:
@@ -673,7 +673,7 @@ JSON File Format:
         obj.linkAnnotation(annotation)
         try:
             obj = update_service.saveAndReturnObject(obj)
-        except omero.SecurityViolation, sv:
+        except omero.SecurityViolation as sv:
             self.ctx.die(510, "SecurityViolation: %s" % sv.message)
 
         self.ctx.out("%sAnnotationLink:%s" % (obj_type, obj.id.val))

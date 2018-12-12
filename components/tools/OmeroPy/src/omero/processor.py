@@ -557,7 +557,7 @@ class ProcessI(omero.grid.Process, omero.util.SimpleServant):
 
                 else:
                     self.status("Skipped signal")
-            except OSError, oserr:
+            except OSError as oserr:
                 self.logger.debug(
                     "err on pid=%s iskill=%s : %s", self.popen.pid, iskill,
                     oserr)
@@ -640,7 +640,7 @@ class ProcessI(omero.grid.Process, omero.util.SimpleServant):
                 self.callbacks[key] = callback
                 self.logger.debug("Added callback: %s", key)
                 return
-        except Exception, ex:
+        except Exception as ex:
             e = ex
         # Only reached on failure
         msg = "Failed to add callback: %s. Reason: %s" % (callback, e)
@@ -658,7 +658,7 @@ class ProcessI(omero.grid.Process, omero.util.SimpleServant):
                     None, None, "No callback registered with id: %s" % key)
             del self.callbacks[key]
             self.logger.debug("Removed callback: %s", key)
-        except Exception, e:
+        except Exception as e:
             msg = "Failed to remove callback: %s. Reason: %s" % (callback, e)
             self.logger.debug(msg)
             raise omero.ApiUsageException(None, None, msg)
@@ -875,7 +875,7 @@ class ProcessorI(omero.grid.Processor, omero.util.Servant):
             cb = omero.grid.ProcessorCallbackPrx.uncheckedCast(cb)
             prx = omero.grid.ProcessorPrx.uncheckedCast(self.prx)
             cb.isProxyAccepted(valid, id, prx)
-        except Exception, e:
+        except Exception as e:
             self.logger.warn(
                 "callback failed on willAccept: %s Exception:%s", cb, e)
 
@@ -896,7 +896,7 @@ class ProcessorI(omero.grid.Processor, omero.util.Servant):
                 except:
                     pass
             cb.responseRunning(rv)
-        except Exception, e:
+        except Exception as e:
             self.logger.warn(
                 "callback failed on requestRunning: %s Exception:%s", cb, e)
 

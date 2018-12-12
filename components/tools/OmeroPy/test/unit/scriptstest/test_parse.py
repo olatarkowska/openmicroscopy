@@ -187,7 +187,7 @@ if True:
         for script in SCRIPTS.walk("*.py"):
             try:
                 parse_file(str(script))
-            except Exception, e:
+            except Exception as e:
                 assert False, "%s\n%s" % (script, e)
 
     def testValidateRoiMovieCall(self):
@@ -299,7 +299,7 @@ if True:
         assert 1 == rv["a"].val
         try:
             parse_inputs(["b=1"], params)
-        except MissingInputs, mi:
+        except MissingInputs as mi:
             assert ["a"] == mi.keys
 
     def testParseInputsLongList(self):

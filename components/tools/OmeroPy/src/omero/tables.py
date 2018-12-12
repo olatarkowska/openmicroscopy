@@ -218,7 +218,7 @@ class TableI(omero.grid.Table, omero.util.SimpleServant):
         try:
             return self.storage.readCoordinates(self.stamp, rowNumbers,
                                                 current)
-        except tables.HDF5ExtError, err:
+        except tables.HDF5ExtError as err:
             aue = omero.ApiUsageException()
             aue.message = "Error reading coordinates. Most likely out of range"
             aue.serverStackTrace = "".join(traceback.format_exc())
@@ -234,7 +234,7 @@ class TableI(omero.grid.Table, omero.util.SimpleServant):
         try:
             return self.storage.read(self.stamp, colNumbers,
                                      start, stop, current)
-        except tables.HDF5ExtError, err:
+        except tables.HDF5ExtError as err:
             aue = omero.ApiUsageException()
             aue.message = "Error reading coordinates. Most likely out of range"
             aue.serverStackTrace = "".join(traceback.format_exc())
@@ -419,7 +419,7 @@ class TablesI(omero.grid.Tables, omero.util.Servant):
                 self._get_dir()
                 self._get_uuid()
                 self._get_repo()
-            except Exception, e:
+            except Exception as e:
                 self.logger.warn("Failed to find repo_svc: %s" % e)
 
             if self.repo_svc:

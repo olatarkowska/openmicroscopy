@@ -301,7 +301,7 @@ class ProxyStringType(object):
     def __call__(self, s):
         try:
             return omero.proxy_to_instance(s, default=self.default)
-        except omero.ClientError, ce:
+        except omero.ClientError as ce:
             raise ValueError(str(ce))
 
     def __repr__(self):
@@ -503,7 +503,7 @@ class Context:
                 stream.write("\n")
             else:
                 stream.flush()
-        except IOError, e:
+        except IOError as e:
             if e.errno != errno.EPIPE:
                 raise
         except:
@@ -631,7 +631,7 @@ def admin_only(*fargs, **fkwargs):
                         privs = types.allEnumerations("AdminPrivilege")
                         need_privs = set(omero.rtypes.unwrap(
                             [x.getValue() for x in privs]))
-                    except Exception, e:
+                    except Exception as e:
                         self.ctx.err("Error: denying access: %s" % e)
                         # If the user can't load enums assume the worst
                         self.error_admin_only(fatal=True)
@@ -732,7 +732,7 @@ class BaseControl(object):
                 created = True
             return (nodedata, created)
 
-        except KeyError, ke:
+        except KeyError as ke:
             self.ctx.err(property + " is not configured")
             self.ctx.die(4, str(ke))
 
@@ -1174,7 +1174,7 @@ class CLI(cmd.Cmd, Context):
             finally:
                 self._stack.pop(0)
                 self.dbg("Stack-: %s" % len(self._stack), level=2)
-        except SystemExit, exc:  # Thrown by argparse
+        except SystemExit as exc:  # Thrown by argparse
             self.dbg("SystemExit raised\n%s" % traceback.format_exc())
             self.rv = exc.code
             return False
@@ -1183,12 +1183,12 @@ class CLI(cmd.Cmd, Context):
         # Omitting for the moment with the new
         # argparse refactoring
         #
-        # except AttributeError, ae:
+        # except AttributeError as ae:
         #    self.err("Possible error in plugin:")
         #    self.err(str(ae))
         #    if self.isdebug:
         #        traceback.print_exc()
-        except NonZeroReturnCode, nzrc:
+        except NonZeroReturnCode as nzrc:
             self.dbg(traceback.format_exc())
             self.rv = nzrc.rv
         return False  # Continue
@@ -1383,7 +1383,7 @@ class CLI(cmd.Cmd, Context):
         from omero.plugins.prefs import getprefs
         try:
             output = getprefs(["get"], str(path(self._cwd(None)) / "lib"))
-        except OSError, err:
+        except OSError as err:
             self.err("Error getting preferences")
             self.dbg(err)
             output = ""
@@ -1418,7 +1418,7 @@ class CLI(cmd.Cmd, Context):
                 return self.get_client()
             except KeyboardInterrupt:
                 raise
-            except Exception, e:
+            except Exception as e:
                 self.dbg("Removing client: %s" % e)
                 self.get_client().closeSession()
                 self.set_client(None)
@@ -1915,7 +1915,7 @@ class GraphControl(CmdControl):
             try:
                 try:
                     speclist, status, cb = self.response(client, req)
-                except omero.LockTimeout, lt:
+                except omero.LockTimeout as lt:
                     self.ctx.die(446, "LockTimeout: %s" % lt.message)
             finally:
                 if cb is not None:

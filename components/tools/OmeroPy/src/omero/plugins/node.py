@@ -99,11 +99,11 @@ class NodeControl(BaseControl):
                     command = command + ["--daemon", "--pidfile",
                                          str(self._pid()), "--nochdir"]
                 self.ctx.call(command)
-        except OSError, o:
+        except OSError as o:
                 msg = """%s\nPossibly an error finding "icegridnode". Try \
 "icegridnode -h" from the command line.""" % o
                 raise Exception(msg)
-        except NonZeroReturnCode, nzrc:
+        except NonZeroReturnCode as nzrc:
                 self._handleNZRC(nzrc)
 
     def status(self, args):
@@ -117,7 +117,7 @@ class NodeControl(BaseControl):
                 self.ctx.call(command)
                 command = ["icegridnode", "--uninstall", "OMERO."+args.name]
                 self.ctx.call(command)
-            except NonZeroReturnCode, nzrc:
+            except NonZeroReturnCode as nzrc:
                 self._handleNZRC(nzrc)
         else:
                 pid = open(self._pid(), "r").readline()

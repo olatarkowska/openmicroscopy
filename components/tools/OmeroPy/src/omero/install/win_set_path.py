@@ -76,7 +76,7 @@ if __name__ == "__main__":
         elif len(sys.argv) == 3:
             win_set_path(old_name=sys.argv[1], new_name=sys.argv[2])
             sys.exit(0)
-    except Exception, e:
+    except Exception as e:
         print "Failed to set path: ", e
         sys.exit(1)
 

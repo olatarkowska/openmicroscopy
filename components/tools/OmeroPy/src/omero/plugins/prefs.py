@@ -257,7 +257,7 @@ class PrefsControl(WriteableConfigControl):
             return ConfigXml(str(cfg_xml))
         except portalocker.LockException:
             self.ctx.die(112, "Could not acquire lock on %s" % cfg_xml)
-        except Exception, e:
+        except Exception as e:
             self.ctx.die(113, str(e))
 
     @with_config
@@ -354,7 +354,7 @@ class PrefsControl(WriteableConfigControl):
             from omeroweb import settings
             setting = settings.CUSTOM_SETTINGS_MAPPINGS.get(key)
             default = setting[2](setting[1]) if setting else []
-        except Exception, e:
+        except Exception as e:
             self.ctx.dbg(traceback.format_exc())
             self.ctx.die(514,
                          "Cannot retrieve default value for property %s: %s" %
@@ -461,7 +461,7 @@ class PrefsControl(WriteableConfigControl):
                         f.close()
         except NonZeroReturnCode:
             raise
-        except Exception, e:
+        except Exception as e:
             self.ctx.die(968, "Cannot read %s: %s" % (args.file, e))
 
     @with_rw_config
@@ -473,7 +473,7 @@ class PrefsControl(WriteableConfigControl):
         temp_file = create_path()
         try:
             edit_path(temp_file, start_text)
-        except RuntimeError, re:
+        except RuntimeError as re:
             self.ctx.dbg(traceback.format_exc())
             self.ctx.die(954, "%s: Failed to edit %s"
                          % (getattr(re, "pid", "Unknown"), temp_file))
