@@ -33,7 +33,7 @@ from getopt import getopt, GetoptError
 def usage(error):
     """Prints usage so that we don't have to. :)"""
     cmd = sys.argv[0]
-    print """%s
+    print ("""%s
 Usage: %s [options...] <importer_log_file>
 Generate performance metrics from an OMERO.importer log file.
 
@@ -46,7 +46,7 @@ Examples:
   %s --series_report importer.log > series_report.csv
 
 Report bugs to ome-devel@lists.openmicroscopy.org.uk""" % \
-        (error, cmd, cmd, cmd)
+        (error, cmd, cmd, cmd))
     sys.exit(2)
 
 
@@ -181,21 +181,21 @@ class ImporterLog(object):
         """
         for import_n, i in enumerate(self.imports):
             elapsed = self.elapsed(i.start, i.end)
-            print "Import(%s) %d start: %s end: %s elapsed: %s" % \
-                (i.name, import_n, i.start, i.end, elapsed)
+            print("Import(%s) %d start: %s end: %s elapsed: %s" % \
+                (i.name, import_n, i.start, i.end, elapsed))
             elapsed = self.elapsed(i.setid_start, i.setid_end)
-            print "setId() start: %s end: %s elapsed: %s" % \
-                (i.setid_start, i.setid_end, elapsed)
+            print("setId() start: %s end: %s elapsed: %s" % \
+                (i.setid_start, i.setid_end, elapsed))
             elapsed = self.elapsed(i.post_process_start, i.post_process_end)
-            print "Post process start: %s end: %s elapsed: %s" % \
-                (i.post_process_start, i.post_process_end, elapsed)
+            print("Post process start: %s end: %s elapsed: %s" % \
+                (i.post_process_start, i.post_process_end, elapsed))
             elapsed = self.elapsed(i.save_to_db_start, i.save_to_db_end)
-            print "Save to DB start: %s end: %s elapsed: %s" % \
-                (i.save_to_db_start, i.save_to_db_end, elapsed)
+            print("Save to DB start: %s end: %s elapsed: %s" % \
+                (i.save_to_db_start, i.save_to_db_end, elapsed))
             if len(i.series) > 0:
                 elapsed = self.elapsed(i.series[0].start, i.series[-1].end)
-                print "Image I/O start: %s end: %s elapsed: %s" % \
-                    (i.series[0].start, i.series[-1].end, elapsed)
+                print("Image I/O start: %s end: %s elapsed: %s" % \
+                    (i.series[0].start, i.series[-1].end, elapsed))
                 elapsed = self.elapsed(i.overlays_start, i.thumbnailing_start)
                 print "Overlays start: %s end: %s elapsed: %s" % \
                     (i.overlays_start, i.thumbnailing_start, elapsed)

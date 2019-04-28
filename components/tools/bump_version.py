@@ -44,6 +44,6 @@ if __name__ == "__main__":
     ns = parser.parse_args()
 
     if not check_version_format(ns.version):
-        print "Invalid version format"
+        print("Invalid version format")
     else:
         bump_version(ns.version)

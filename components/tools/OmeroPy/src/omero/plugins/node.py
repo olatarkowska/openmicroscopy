@@ -74,8 +74,8 @@ class NodeControl(BaseControl):
         if not myoutput.exists():
             pass
         else:
-            print "from %s:" % str(myoutput)
-            print tail_lines(str(myoutput), 2)
+            print("from %s:" % str(myoutput))
+            print(tail_lines(str(myoutput), 2))
 
     @windows_warning
     def start(self, args):

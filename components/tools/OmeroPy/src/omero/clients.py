@@ -257,7 +257,7 @@ class BaseClient(object):
             keys = list(m.keys())
             keys.sort()
             for key in keys:
-                print "%s=%s" % (key, m[key])
+                print("%s=%s" % (key, m[key]))
 
         self.__lock.acquire()
         try:
@@ -1210,7 +1210,7 @@ class BaseClient(object):
                 try:
                     self.ic.getLogger().error("Error performing %s" % action)
                 except:
-                    print "Error performing %s" % action
+                    print("Error performing %s" % action)
 
         def requestHeartbeat(self, current=None):
             self.execute(self.onHeartbeat, "heartbeat")

@@ -193,7 +193,7 @@ def plot_threads(watcher, all_colors=("blue", "red", "yellow", "green",
             try:
                 t = digit.match(ll.thread).group(1)
             except:
-                print "Error parsing thread:", ll.thread
+                print("Error parsing thread:", ll.thread)
                 raise
         y = np.array([int(t), int(t)])
         x = np.array([ll.start-first, ll.stop-first])
@@ -218,6 +218,6 @@ def plot_threads(watcher, all_colors=("blue", "red", "yellow", "green",
 
 if __name__ == "__main__":
     for g in allthreads_watcher(sys.argv).gen():
-        print "Date:%s\nElapsed:%s\nLevel:%s\nThread:%s\nMethod:%s\n" \
+        print("Date:%s\nElapsed:%s\nLevel:%s\nThread:%s\nMethod:%s\n" \
             "Status:%s\n\n" % (g.date, g.took, g.level, g.thread, g.message,
-                               g.status)
+                               g.status))

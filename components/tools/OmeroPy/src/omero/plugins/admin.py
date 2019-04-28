@@ -1706,8 +1706,8 @@ present, the user will enter a console""")
             for file in files:
                 size = os.path.getsize(file)
                 total += 0
-                print file, size
-            print "Total:", size
+                print(file, size)
+            print("Total:", size)
             yes = self.ctx.input("Enter 'y' to continue:")
             if not yes.lower().startswith("y"):
                 return

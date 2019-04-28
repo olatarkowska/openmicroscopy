@@ -82,7 +82,7 @@ elif os.name == 'posix':
     LOCK_SH = fcntl.LOCK_SH
     LOCK_NB = fcntl.LOCK_NB
 else:
-    raise RuntimeError, "PortaLocker only defined for nt and posix platforms"
+    raise RuntimeError("PortaLocker only defined for nt and posix platforms")
 
 if os.name == 'nt':
 
@@ -147,7 +147,7 @@ if __name__ == '__main__':
     timestamp = strftime("%m/%d/%Y %H:%M:%S\n", localtime(time()))
     log.write( timestamp )
 
-    print "Wrote lines. Hit enter to release lock."
+    print("Wrote lines. Hit enter to release lock.")
     dummy = sys.stdin.readline()
 
     log.close()

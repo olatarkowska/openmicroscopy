@@ -575,7 +575,7 @@ class ImportControl(BaseControl):
                     else:
                         with open(command_args.dry_run % incr, "w") as o:
                             # FIXME: this assumes 'bin/omero'
-                            print >>o, sys.argv[0], "import", rv
+                            print(sys.argv[0], "import", rv, file=o)
                 else:
                     self.do_import(command_args, xargs)
                 if self.ctx.rv:

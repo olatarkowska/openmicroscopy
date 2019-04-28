@@ -496,7 +496,7 @@ class path(unicode):
             p1 = path.path('/tmp')
             p2 = path.path('/tmp/foo')
             if p2.parpath(p1):
-                print 'p2 is contained in p1'
+                print('p2 is contained in p1')
 
         This method does not follow symlinks.
         """

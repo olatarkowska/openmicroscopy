@@ -129,7 +129,7 @@ class TestDBHelper(object):
                 try:
                     tmpfile.close()
                 except:
-                    print "Error closing:" + tmpfile
+                    print("Error closing:" + tmpfile)
         if failure:
             raise Exception("Exception on client.closeSession")
 

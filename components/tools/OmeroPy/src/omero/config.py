@@ -280,8 +280,8 @@ class ConfigXml(object):
         prop_list = self.properties()
         for id, p in prop_list:
             props = self.props_to_dict(p)
-            print "# ===> %s <===" % id
-            print self.dict_to_text(props)
+            print("# ===> %s <===" % id)
+            print(self.dict_to_text(props))
 
     def save(self):
         """

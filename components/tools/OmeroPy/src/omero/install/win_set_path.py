@@ -43,7 +43,7 @@ def win_set_path(new_name=dummy, old_name=r"c:\omero_dist", dir=path(".")):
     new_name = path(new_name).abspath()
     old_name = path(old_name).abspath()
 
-    print "Converting from %s to %s" % (old_name, new_name)
+    print("Converting from %s to %s" % (old_name, new_name))
 
     new_name2 = new_name.replace("\\", "\\\\")
     old_name2 = old_name.replace("\\", "\\\\")
@@ -52,15 +52,15 @@ def win_set_path(new_name=dummy, old_name=r"c:\omero_dist", dir=path(".")):
     for line in fileinput.input([str(cfg), str(xml)], inplace=1):
         if line.find(old_name) >= 0:
             count += 1
-            print line.replace(old_name, new_name),
+            print(line.replace(old_name, new_name),)
         elif line.find(old_name2) >= 0:
             count += 1
-            print line.replace(old_name2, new_name2),
+            print(line.replace(old_name2, new_name2),)
         else:
-            print line,
+            print(line,)
 
     fileinput.close()
-    print "Changes made: %s" % count
+    print("Changes made: %s" % count)
     return count
 
 if __name__ == "__main__":
@@ -77,12 +77,12 @@ if __name__ == "__main__":
             win_set_path(old_name=sys.argv[1], new_name=sys.argv[2])
             sys.exit(0)
     except Exception as e:
-        print "Failed to set path: ", e
+        print("Failed to set path: ", e)
         sys.exit(1)
 
-    print """Usage: %s [oldname] newname
+    print("""Usage: %s [oldname] newname
 
 Replaces the [oldname] entries in the Windows configuration files
 with [newname]. By default, [oldname] is set to "c:\omero_dist"
-        """ % sys.argv[0]
+        """ % sys.argv[0])
     sys.exit(2)

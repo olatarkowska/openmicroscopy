@@ -70,8 +70,8 @@ if "DEBUG" in os.environ:
         DEBUG = int(os.environ["DEBUG"])
     except ValueError:
         DEBUG = 1
-    print "Deprecated warning: use the 'bin/omero --debug=x [args]' to debug"
-    print "Running omero with debugging == 1"
+    print("Deprecated warning: use the 'bin/omero --debug=x [args]' to debug")
+    print("Running omero with debugging == 1")
 
 OMERODOC = """
 Command-line tool for local and remote interactions with OMERO.
@@ -507,8 +507,8 @@ class Context:
             if e.errno != errno.EPIPE:
                 raise
         except:
-            print >>sys.stderr, "Error printing text"
-            print >>sys.stdout, text
+            print("Error printing text", file=sys.stderr) 
+            print(text, file=sys.stdout)
             if self.isdebug:
                 traceback.print_exc()
 
@@ -538,7 +538,7 @@ class Context:
             dir.mkdir()
         elif not dir.isdir():
             raise Exception("%s is not a directory" % dir)
-        dir.chmod(0700)
+        dir.chmod(448)
         return dir
 
     def pub(self, args, strict=False):
@@ -1353,7 +1353,7 @@ class CLI(cmd.Cmd, Context):
         except:
             if self.isdebug:
                 raise
-            print "No omero.properties found"
+            print("No omero.properties found")
             output = ""
         return output
 
@@ -1500,7 +1500,7 @@ class CLI(cmd.Cmd, Context):
                     paths.add(x)
             else:
                 if self.isdebug:
-                    print "Can't load %s" % x
+                    print("Can't load %s" % x)
         for plugin_path in paths:
             self.loadpath(path(plugin_path))
 
@@ -1515,7 +1515,7 @@ class CLI(cmd.Cmd, Context):
                     self.loadpath(path(plugin))
         else:
             if self.isdebug:
-                print "Loading %s" % pathobj
+                print("Loading %s" % pathobj)
             try:
                 loc = {"register": self.register_only}
                 execfile(str(pathobj), loc)

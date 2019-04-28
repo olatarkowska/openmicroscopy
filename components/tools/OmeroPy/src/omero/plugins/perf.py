@@ -41,7 +41,7 @@ class PerfControl(BaseControl):
             ops = [x[4:] for x in dir(perf_test.Item) if x.startswith("_op_")]
             ops.sort()
             for op in ops:
-                print op
+                print(op)
         else:
             if not args.file:
                 self.ctx.die(167, "No files given. Use '-' for stdin.")

@@ -37,11 +37,11 @@ class TestReplay(object):
 
             def fileset(self, timestamp, data):
                 f = Replay.fileset(self, timestamp, data)
-                print "=" * 80
+                print("=" * 80)
                 for k, v in f.items():
-                    print k[l:]
+                    print(k[l:])
                     for i in v:
-                        print "\t", i[l:]
+                        print("\t", i[l:])
                 return f
         MyReplay(self.dir, source, None).run()
         self.driver.run()

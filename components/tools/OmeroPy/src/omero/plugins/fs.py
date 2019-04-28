@@ -774,7 +774,7 @@ Examples:
 
         defaultdict(list)
         for ofile in fileset.listFiles():
-            print ofile.path + ofile.name
+            print(ofile.path + ofile.name)
 
     def logfile(self, args):
         """Return the logfile associated with a fileset"""

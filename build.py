@@ -87,7 +87,7 @@ def handle_tools(args):
         "-py": _(["components", "tools", "OmeroPy", "build.xml"]),
         "-web": _(["components", "tools", "OmeroWeb", "build.xml"]),
     }
-    while len(args) > 0 and args[0] in mappings.keys()+["-perf"]:
+    while len(args) > 0 and args[0] in list(mappings)+["-perf"]:
         if args[0] == "-perf":
             args.pop(0)
             A = ["-listener",

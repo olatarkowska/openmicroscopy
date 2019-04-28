@@ -1143,7 +1143,7 @@ class ITest(object):
                     not_ready = False
                 except Exception as ex:
                     # try again in elapse_time
-                    print count, "Pyramid not ready:", ex.message
+                    print(count, "Pyramid not ready:", ex.message)
                     time.sleep(elapse_time)
                     count = count + elapse_time
         finally:

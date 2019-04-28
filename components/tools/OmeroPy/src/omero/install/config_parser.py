@@ -368,25 +368,25 @@ class PropertyParser(object):
         """Print all keys and their default values"""
         values = ["%s=%s" % (p.key, p.val) for p in self]
         for x in sorted(values):
-            print x
+            print(x)
 
     def print_keys(self):
         """Print all keys"""
         data = self.data()
         for k, v in sorted(data.items()):
-            print "%s (%s)" % (k, len(v))
+            print("%s (%s)" % (k, len(v)))
             for i in v:
-                print "\t", i
+                print("\t", i)
 
     def print_headers(self):
         """Print headers and number of keys"""
         headers = self.headers()
         for k, v in sorted(headers.items(), key=lambda x: x[0].name):
-            print "%s (%s)" % (k.name, len(v))
+            print("%s (%s)" % (k.name, len(v)))
 
     def print_rst(self):
         """Print configuration in reStructuredText format"""
-        print TOP
+        print(TOP)
         headers = self.headers()
         for header in sorted(headers, key=lambda x: x.name):
             properties = ""
@@ -418,7 +418,7 @@ class PropertyParser(object):
                  "hline": hline,
                  "properties": properties,
                  "reference": header.get_reference()}
-            print HEADER % m
+            print(HEADER % m)
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
@@ -440,7 +440,7 @@ if __name__ == "__main__":
     pp.parse_module('omeroweb.settings')
 
     if ns.dbg:
-        print "Found:", len(list(pp))
+        print("Found:", len(list(pp)))
 
     elif ns.keys:
         pp.print_keys()

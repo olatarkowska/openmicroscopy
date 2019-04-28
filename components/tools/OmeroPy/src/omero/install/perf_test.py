@@ -337,11 +337,12 @@ class CsvReporter(Reporter):
         else:
             self.file = str(dir / "report.csv")
             self.stream = open(self.file, "w")
-        print >>self.stream, "Command,Start,Stop,Elapsed,Average,Values"
+        print("Command,Start,Stop,Elapsed,Average,Values", file=self.stream)
 
     def report(self, command, start, stop, loops, values):
-        print >>self.stream, "%s,%s,%s,%s,%s,%s" % (
-            command, start, stop, (stop-start), (stop-start)/loops, values)
+        print("%s,%s,%s,%s,%s,%s" % (
+            command, start, stop, (stop-start), (stop-start)/loops, values),
+            file=self.stream)
         self.stream.flush()
 
 

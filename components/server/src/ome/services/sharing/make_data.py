@@ -45,18 +45,18 @@ rep = os.path.normpath(rep)
 def call(cmd, cwd="."):
     rc = subprocess.call(cmd, shell=True, cwd=cwd)
     if rc != 0:
-        print "Halting..."
+        print("Halting...")
         sys.exit(rc)
 
 
 def clean(dir=dat):
         if os.path.exists(dat):
-            print "Removing %s. Cancel now if necessary. Waiting 5 seconds." \
-                % dat
+            print("Removing %s. Cancel now if necessary. Waiting 5 seconds." \
+                % dat)
             time.sleep(5)
             ls = os.listdir(dat)
             for file in ls:
-                print "Removing %s" % file
+                print("Removing %s" % file)
                 os.remove(os.path.join(dat, file))
             os.rmdir(dat)
 
@@ -101,7 +101,7 @@ def compile(dir=dat):
         cp = ":".join(glob.glob(pat1) + glob.glob(pat2))
         javac_cmd = "javac -source 1.7 -target 1.7 -cp "
         javac_cmd += ("%s %s/*.java""" % (cp, dat))
-        print javac_cmd
+        print(javac_cmd)
         call(javac_cmd, cwd=src)
         jar_cmd = "jar cvf "
         jar_cmd += ("%s/lib/repository/omero-shares-%s.jar " % (top, version))
@@ -113,4 +113,4 @@ if __name__ == "__main__":
     clean()
     slice()
     compile()
-    print "Be sure to run for all supported Ice versions"
+    print("Be sure to run for all supported Ice versions")

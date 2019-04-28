@@ -191,7 +191,7 @@ class HelpControl(BaseControl):
             "version": VERSION,
             "commands": commands,
             "topics": topics}
-        print HELP_USAGE % key_list
+        print(HELP_USAGE % key_list)
 
     def print_single_command_or_topic(self, args):
         """Print the help for a command or a topic"""

@@ -55,7 +55,7 @@ client = scripts.client("length of input string",
 authors = ["OME Team"],
 institutions = ["openmicroscopy.org"])
 
-print "Starting script"
+print("Starting script")
 
 try:
     a = client.getInput("a").getValue()
@@ -65,7 +65,7 @@ try:
 finally:
     client.closeSession()
 
-print "Finished script"
+print("Finished script")
 """
 
 RE0 = re.compile("\s*script\s+upload\s*")
@@ -472,7 +472,7 @@ class ScriptControl(BaseControl):
         self._parse_scripts(scripts, banner)
 
     def log(self, args):
-        print args
+        print(args)
         pass
 
     def params(self, args):
